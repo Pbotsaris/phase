@@ -1,18 +1,15 @@
 <script> 
 import Buttons from "./Buttons.svelte"
+
 </script>
-
-
 <div class="container">
 	<div class="divider-top">
-		<Buttons type="phase-bt"/>
+		<Buttons type="phase-bt" />
 	</div>
 	<div class="divider-mid">
 		<Buttons type="phase-bt"/>
 	</div>
 </div>
-
-
 
 <style>
 	

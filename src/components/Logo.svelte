@@ -1,15 +1,31 @@
 <script>
-import styles from './styles.svelte'
+import {fade} from 'svelte/transition'
+export let visible;
 </script>
-<div class="logo-container">
+
+{#if !visible}
+	<div class="logo-container"
+		transition:fade={{transition: 100}}>
 	
-<img src="images/logo.svg" alt="logo" class="logo">
-<span class="logo-copy">A hypinotically wonderful journey into infinty.</span>
-</div>
+		<img src="images/logo.svg" alt="logo" class="logo">
+		<span class="logo-copy">A hypinotically wonderful journey into infinty.</span>
+	</div>
+{/if}
 
 <style>
 
-  .logo-container{
+.logo{
+	width: 50%;
+
+}
+	.logo-copy{
+		margin-top: 0.7rem;
+		color:var(--main-blue);
+		font-weight: 600;
+		letter-spacing: 1px;
+	}
+
+	.logo-container{
 		width: 100%;
 		display:flex;
 		justify-content: center;
@@ -17,16 +33,5 @@ import styles from './styles.svelte'
 		flex-direction: column;
 	}
 
-	.logo{
-		width: 50%;
-
-	}
-	.logo-copy{
-		margin-top: 0.7rem;
-		color:var(--main-blue);
-		font-weight: 600;
-	letter-spacing: 1px;
-
-	}
 
 </style>

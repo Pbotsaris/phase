@@ -1,9 +1,19 @@
 <script>
 import Logo from './Logo.svelte'
+import Record from './Record.svelte'
+import {hasStarted} from '../stores'
+
+let has_started;
+
+hasStarted.subscribe(value => {
+		has_started = value;
+	}); 
+
 </script>
 
 <section class="container">
-		<Logo/>
+			<Logo visible={has_started}/>
+			<Record visible={has_started}/>
 </section>
 
 <style type="text/css">
@@ -20,4 +30,5 @@ import Logo from './Logo.svelte'
 		background: linear-gradient(180deg, rgba(255,171,199,1) 7%, rgba(220,213,203,1) 100%);
 	}
 
+ 
 </style>
