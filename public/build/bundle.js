@@ -843,9 +843,9 @@ var app = (function () {
     			create_component(display.$$.fragment);
     			t = space();
     			create_component(controls.$$.fragment);
-    			attr_dev(div, "class", "main-container svelte-1sulfra");
+    			attr_dev(div, "class", "main-container svelte-1nabdzp");
     			add_location(div, file, 7, 1, 145);
-    			attr_dev(main, "class", "svelte-1sulfra");
+    			attr_dev(main, "class", "svelte-1nabdzp");
     			add_location(main, file, 6, 0, 137);
     		},
     		l: function claim(nodes) {

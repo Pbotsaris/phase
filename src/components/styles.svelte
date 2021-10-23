@@ -8,6 +8,7 @@
 
 :global(:root){
 	--main-blue: #0629a8;
+	--red:rgb(220 58 48);
 	--outer-gray: #cacdd5;
 }
 

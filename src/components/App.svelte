@@ -30,7 +30,7 @@ import Display from './Display.svelte'
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: solid;
+		border: 2px solid black;
 		width: 98%;
 		height: 97%;
 		min-height: 70%;
