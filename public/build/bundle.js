@@ -432,8 +432,8 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = "images/phase-bt.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", "button svelte-hckbp9");
-    			add_location(img, file$4, 7, 1, 87);
+    			attr_dev(img, "class", "button svelte-xh0b9t");
+    			add_location(img, file$4, 7, 2, 88);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -564,12 +564,18 @@ var app = (function () {
     function create_fragment$3(ctx) {
     	let div2;
     	let div0;
-    	let buttons;
+    	let buttons0;
     	let t;
     	let div1;
+    	let buttons1;
     	let current;
 
-    	buttons = new Buttons({
+    	buttons0 = new Buttons({
+    			props: { type: "phase-bt" },
+    			$$inline: true
+    		});
+
+    	buttons1 = new Buttons({
     			props: { type: "phase-bt" },
     			$$inline: true
     		});
@@ -578,14 +584,15 @@ var app = (function () {
     		c: function create() {
     			div2 = element("div");
     			div0 = element("div");
-    			create_component(buttons.$$.fragment);
+    			create_component(buttons0.$$.fragment);
     			t = space();
     			div1 = element("div");
-    			attr_dev(div0, "class", "divider");
+    			create_component(buttons1.$$.fragment);
+    			attr_dev(div0, "class", "divider-top svelte-14a3ue5");
     			add_location(div0, file$3, 6, 1, 86);
-    			attr_dev(div1, "class", "divider");
-    			add_location(div1, file$3, 9, 1, 146);
-    			attr_dev(div2, "class", "container svelte-ahidvb");
+    			attr_dev(div1, "class", "divider-mid svelte-14a3ue5");
+    			add_location(div1, file$3, 9, 1, 150);
+    			attr_dev(div2, "class", "container svelte-14a3ue5");
     			add_location(div2, file$3, 5, 0, 61);
     		},
     		l: function claim(nodes) {
@@ -594,24 +601,28 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
     			append_dev(div2, div0);
-    			mount_component(buttons, div0, null);
+    			mount_component(buttons0, div0, null);
     			append_dev(div2, t);
     			append_dev(div2, div1);
+    			mount_component(buttons1, div1, null);
     			current = true;
     		},
     		p: noop,
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(buttons.$$.fragment, local);
+    			transition_in(buttons0.$$.fragment, local);
+    			transition_in(buttons1.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(buttons.$$.fragment, local);
+    			transition_out(buttons0.$$.fragment, local);
+    			transition_out(buttons1.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div2);
-    			destroy_component(buttons);
+    			destroy_component(buttons0);
+    			destroy_component(buttons1);
     		}
     	};
 
