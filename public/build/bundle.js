@@ -758,7 +758,7 @@ var app = (function () {
     		c: function create() {
     			section = element("section");
     			create_component(logo.$$.fragment);
-    			attr_dev(section, "class", "container svelte-10yie0v");
+    			attr_dev(section, "class", "container svelte-thtg1g");
     			add_location(section, file$1, 4, 0, 53);
     		},
     		l: function claim(nodes) {
