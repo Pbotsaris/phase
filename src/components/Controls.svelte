@@ -14,6 +14,7 @@ import Buttons from "./Buttons.svelte"
 <style>
 	
 	.container{
+		z-index: 3;
 		display: flex;
 		flex-direction: column;
 		width: 98.5%;

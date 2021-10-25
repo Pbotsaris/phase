@@ -5,7 +5,7 @@ export let visible;
 
 {#if !visible}
 	<div class="logo-container"
-		transition:fade={{transition: 100}}>
+		transition:fade={{transition: 200}}>
 	
 		<img src="images/logo.svg" alt="logo" class="logo">
 		<span class="logo-copy">A hypinotically wonderful journey into infinty.</span>

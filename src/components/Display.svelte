@@ -20,6 +20,7 @@ hasStarted.subscribe(value => {
 	
 .container{
 		display: flex;
+		z-index: 1;
 		justify-content: center;
 		align-items: center;
 		margin-top: 0.75%;
