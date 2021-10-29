@@ -6,23 +6,23 @@ export let type;
 
 let has_started;
 
-function onClick(){
-hasStarted.set(true)
-}
 hasStarted.subscribe(value => {
 		has_started = value;
 	}); 
 
 
+function onClick(){
+hasStarted.set(true)
+}
+
 </script>
 
 
 <div>
-	{#if type == 'phase-bt' && !has_started}
+	{#if type == 'phase-bt'}
 		<img src="images/phase-bt.svg"
 				 alt="start button"
 		     class="button"
-			   trasition:fade={{duration: 200}}
 			   on:click={onClick}
 		>
 	{/if}
@@ -32,6 +32,7 @@ hasStarted.subscribe(value => {
 
 .button{
 	width: 80px;
+	cursor: pointer;
 }
 
 

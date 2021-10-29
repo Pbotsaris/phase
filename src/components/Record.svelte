@@ -58,6 +58,7 @@ $: setTimeout(()=> doFloat = true, 3000);
 	justify-content: center;
 	width: 270px;
 	height: 100%;
+	cursor: pointer;
 }
 		.outer{
 			position:absolute;
