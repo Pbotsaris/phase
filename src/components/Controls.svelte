@@ -1,10 +1,25 @@
 <script> 
+import {hasStarted} from '../stores'
 import Buttons from "./Buttons.svelte"
+import Keyboard from "../Keyboard.svelte"; 
+
+let has_started;
+
+hasStarted.subscribe(value => {
+		has_started = value;
+	}); 
+
 
 </script>
 <div class="container">
 	<div class="divider-top">
+		{#if has_started}
+			<div class = "keyboard-container">
+	 		 <Keyboard/>
+			</div>
+		{:else}
 		<Buttons type="phase-bt" />
+		{/if}
 	</div>
 	<div class="divider-mid">
 		<Buttons type="phase-bt"/>
@@ -41,6 +56,13 @@ import Buttons from "./Buttons.svelte"
 		margin-right: 1.5rem;
 		margin-top: 2rem;
 			
+
+	}
+
+	.keyboard-container{
+		display: flex;
+
+
 
 	}
 
