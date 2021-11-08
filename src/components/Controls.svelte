@@ -9,8 +9,8 @@ hasStarted.subscribe(value => {
 		has_started = value;
 	}); 
 
-
 </script>
+
 <div class="container">
 	<div class="divider-top">
 		{#if has_started}
@@ -27,7 +27,6 @@ hasStarted.subscribe(value => {
 </div>
 
 <style>
-	
 	.container{
 		z-index: 3;
 		display: flex;
@@ -61,7 +60,6 @@ hasStarted.subscribe(value => {
 
 	.keyboard-container{
 		display: flex;
-
 
 
 	}
