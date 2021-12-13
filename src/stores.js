@@ -1,3 +1,4 @@
 import {writable} from 'svelte/store'
 
-export const hasStarted = writable(false);
+// write stores here e.g:
+// export const hasStarted = writable(false);
