@@ -1,6 +1,6 @@
 <script>
 
-import {fade} from 'svelte/transition'
+import SynthVoice from '../tone/synth_voice'
 
 let keys = [ 
     {label:  'a',  keydown: false},
@@ -16,9 +16,12 @@ let keys = [
 
 function updateKeys(key){
   const index = keys.findIndex( k => k.label === key.label)
-  keys[index].keydown = true;
+  if(index >= 0)
+    keys[index].keydown = true;
   return index;
 }
+
+const synth = new SynthVoice('fatsawtooth', 400)
 
 /*
  * Mouse click 
@@ -26,6 +29,9 @@ function updateKeys(key){
 
 function handleClick(key){
    const index  = updateKeys(key)
+
+  synth.noteOn('C2', '8n');
+
   setTimeout(()=> keys[index].keydown = false, 150)
 }
 
@@ -35,7 +41,8 @@ function handleClick(key){
 
 function handleKeydown(event){
   const index = updateKeys({label: event.key})
-  setTimeout(()=> keys[index].keydown = false, 150)
+  if(index >= 0)
+      setTimeout(()=> keys[index].keydown = false, 150)
 }
 </script>
 
@@ -55,6 +62,8 @@ function handleKeydown(event){
     </span>
   </div>
 {/each}
+
+<button on:click = {()=> synth.start() }> start sound </button>
 
 <style>
 .key-container{
