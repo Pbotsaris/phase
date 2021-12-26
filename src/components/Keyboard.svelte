@@ -1,6 +1,7 @@
 <script>
 
 import SynthVoice from '../tone/synth_voice'
+import Scales from '../scales'
 
 let keys = [ 
     {label:  'a',  keydown: false},
@@ -22,6 +23,12 @@ function updateKeys(key){
 }
 
 const synth = new SynthVoice('fatsawtooth', 400)
+const scale = new Scales();
+
+scale.setTonality('minor')
+scale.setKey('G')
+
+console.log(scale.current)
 
 /*
  * Mouse click 

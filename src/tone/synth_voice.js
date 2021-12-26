@@ -49,9 +49,6 @@ class SynthVoice {
       this.panner,
       Tone.Destination,
     )
-
-    console.log('voice ready')
-
   }
 
   async isVerbReady() {
