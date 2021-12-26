@@ -20,23 +20,29 @@ function updateKeys(key){
   return index;
 }
 
+/*
+ * Mouse click 
+ */
+
 function handleClick(key){
    const index  = updateKeys(key)
   setTimeout(()=> keys[index].keydown = false, 150)
 }
 
+/*
+ *  Keyboard
+ */
+
 function handleKeydown(event){
   const index = updateKeys({label: event.key})
   setTimeout(()=> keys[index].keydown = false, 150)
 }
-
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
 
-{#each keys as key, i}
+{#each keys as key}
   <div
-    in:fade={{duration: 150, delay: 2500 + (i * 100)}}
     on:click = {()=> handleClick(key)}
     class="key-container">
     {#if key.keydown}
@@ -44,8 +50,8 @@ function handleKeydown(event){
     {:else}
        <img src="images/key.svg" alt="" class="key">
      {/if}
-     <span
-       class="label {key.keydown ? 'down' : 'up'}">{key.label}
+     <span class="label {key.keydown ? 'down' : 'up'}">
+       {key.label}
     </span>
   </div>
 {/each}
