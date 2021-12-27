@@ -49,9 +49,13 @@ export default class Scales {
     this.current = SCALES[this.tonality].map((notePos, index) => {
       const note = (notePos + KEYS[this.key]) % NOTES.length
 
-      // TODO: refactor this mess
-      let octave = index == OCTAVE_INDEX && KEYS[this.key] == 0 ? this._addToOctave(this.octave, 1) : this.octave;
-      octave = index > toOctaveOffset ? this._addToOctave(octave, 1) : octave;
+      let octave = this.octave;
+
+      if (index == OCTAVE_INDEX && KEYS[this.key] == 0)
+        octave = this._addToOctave(this.octave, 1)
+
+      if (KEYS[this.key] != 0 && index > toOctaveOffset)
+        octave = this._addToOctave(octave, 1)
 
       return `${NOTES[note]}${octave}`
     })
@@ -61,10 +65,6 @@ export default class Scales {
     return ((octave * 1) + number).toString();
   }
 
-
-  /*     
-   *   helper find which index of the scale array we should offset the octave depending on the key.
-   */
   _indexToOffset(key) {
 
     if (key == 1 || key == 2)
@@ -87,5 +87,4 @@ export default class Scales {
 
     return 0;
   }
-
 }
