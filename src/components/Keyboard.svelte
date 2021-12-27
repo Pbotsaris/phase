@@ -3,8 +3,16 @@
 import SynthVoice from '../tone/synth_voice'
 import Scales from '../scales'
 
+/*
+ *  Init
+ */
+
+const synth = new SynthVoice();
+let scale = new Scales();
+let selectedTonality;
+let selectedKey;
+
 let keys = [ 
-    {label:  'a',  keydown: false},
     { label: 's', keydown: false},
     { label: 'd', keydown: false},
     { label: 'f', keydown: false}, 
@@ -15,35 +23,51 @@ let keys = [
     { label: 'l', keydown: false}
   ];  
 
-function updateKeys(key){
+/*
+ *  Helpers
+ */
+
+function addScaleToKeys(scale){
+ keys = keys.map((key, i) =>{
+   return {...key, note: scale[i]}
+   })
+}
+
+/*
+ *  Updated State 
+ */
+
+function updateKeys (key) {
   const index = keys.findIndex( k => k.label === key.label)
   if(index >= 0)
     keys[index].keydown = true;
   return index;
 }
 
-const synth = new SynthVoice('fatsawtooth', 400)
-const scale = new Scales();
+function updateTonality() {
+  scale.setTonality(selectedTonality);
+  addScaleToKeys(scale.current);
+}
 
-scale.setTonality('minor')
-scale.setKey('G')
-
-console.log(scale.current)
+function updateKey() {
+  scale.setKey(selectedKey);
+  addScaleToKeys(scale.current);
+}
 
 /*
- * Mouse click 
+ *  Mouse callback 
  */
 
 function handleClick(key){
    const index  = updateKeys(key)
-
-  synth.noteOn('C2', '8n');
+    console.log(key.note)
+    synth.noteOn(key.note , '8n');
 
   setTimeout(()=> keys[index].keydown = false, 150)
 }
 
 /*
- *  Keyboard
+ *  Keyboard callback
  */
 
 function handleKeydown(event){
@@ -51,6 +75,8 @@ function handleKeydown(event){
   if(index >= 0)
       setTimeout(()=> keys[index].keydown = false, 150)
 }
+
+addScaleToKeys(scale.current);
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
@@ -70,7 +96,23 @@ function handleKeydown(event){
   </div>
 {/each}
 
+<div class="controls" >
+
 <button on:click = {()=> synth.start() }> start sound </button>
+
+<select bind:value={selectedTonality} on:change={updateTonality}>
+  {#each scale.tonalities as tonality}
+    <option value={tonality}> {tonality} </option>
+{/each}
+</select>
+
+<select bind:value={selectedKey} on:change={updateKey}>
+  {#each scale.keys as key}
+    <option value={key}> {key} </option>
+{/each}
+</select>
+
+</div>
 
 <style>
 .key-container{
@@ -78,8 +120,13 @@ function handleKeydown(event){
  display: flex;
  justify-content: center;
  align-items: center;
+}
 
- }
+.controls{
+   display: flex;
+   justify-content: center;
+}
+
 .key{
 width: 50px;
 margin: 0 0.5rem;

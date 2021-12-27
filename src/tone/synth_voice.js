@@ -1,7 +1,7 @@
 import * as Tone from 'tone'
 
 class SynthVoice {
-  constructor(wave, freq) {
+  constructor(wave = 'fatsawtooth', freq = 500) {
     this.synth = new Tone.MonoSynth();
     this.freq = freq;
     this.wave = wave;
