@@ -39,7 +39,6 @@
    */
 
   function handleClick(key) {
-     console.log(key)
     const index = setToKeydown(key)
     synth.noteOn(key.note, '8n')
 
@@ -53,6 +52,10 @@
 
   function handleKeydown(event) {
     const index = setToKeydown({ label: event.key })
+    const note = keyboardState[index].note;
+
+    synth.noteOn(note, '8n')
+
     if (index >= 0) setTimeout(() => updateState(index, false), 150)
   }
 </script>
