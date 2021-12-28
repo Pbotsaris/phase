@@ -1,7 +1,26 @@
 import * as Tone from 'tone'
 
+/*
+ *   @class SynthVoice
+ *    Creates synth voice with a VCO, VFC, VCA, filter envelope, amplitude envelope, pan, volume fader.
+ *    as well as sends for a ping pong delay and reverb.   
+ *   
+ *   @example
+ *    const voice = new SynthVoice()
+ *    voice.start();
+ *    voice.noteOn('C1', '8n');   //  plays a C1 with 1/8 note duration.
+ *    voice.setFreq(500);         // sets filter cutoff to 500hz
+ *    voice.noteOn('C1', '8n'); 
+ */
+
 class SynthVoice {
-  constructor(wave = 'fatsawtooth', freq = 500) {
+
+  /*  Creates a synth voice.
+   *  @param {string} wave  
+   *  @param {number} freq
+   */
+     constructor(wave = 'fatsawtooth', freq = 500) {
+
     this.synth = new Tone.MonoSynth();
     this.freq = freq;
     this.wave = wave;

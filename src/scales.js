@@ -19,7 +19,6 @@
                 0    1     2    3     4    5    6     7    8     9    10    11  */
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-
 /* Available keys */
 
 const KEYS = {
@@ -58,53 +57,46 @@ export default class Scales {
    *  @param {string} tonality major, minor, dorian, mixo, phrygian and lydian.
    *  @param {string} key  C, Csharp, E, Gsharp etc.
    */
-
-  constructor(octave = '3', tonality = 'major', key = 'C') {
+     constructor(octave = '3', tonality = 'major', key = 'C') {
 
     /*  octave. 
      *  @type {string} 
      *  @public
      */
-
-    this.octave = octave
+         this.octave = octave
 
     /*  tonality. accepted values: major, minor, dorian, mixo, phrygian and lydian.
      *  @type {string} 
      *  @public
      */
-
-    this.tonality = tonality
+         this.tonality = tonality
 
     /*  key. the musical key. accepted values: C, Csharp, E, Gsharp etc.
      *  @type {string} 
      *  @public
      */
-
-    this.key = key
+         this.key = key
 
     /*  current. the current selected scale.
      *  @type {string} 
      *  @public
      *  @readonly
      */
-
-    this.current
+         this.current
 
     /*  tonalities. a list with all available tonalities.
      *  @type {array} 
      *  @public
      *  @readonly
      */
-
-    this.tonalities = Object.keys(SCALES)
+         this.tonalities = Object.keys(SCALES)
 
     /*  keys. a list with all available music keys.
      *  @type {array} 
      *  @public
      *  @readonly
      */
-
-    this.keys = Object.keys(KEYS)
+         this.keys = Object.keys(KEYS)
     this._setScale()
   }
 
@@ -113,8 +105,7 @@ export default class Scales {
   /*  Set the octave property and updates the scale.
    *  @param {string} octave
    */
-
-  setOctave(octave) {
+     setOctave(octave) {
     this.octave = octave
     this._setScale()
   }
@@ -122,8 +113,7 @@ export default class Scales {
   /*  Set the tonality property and updates the scale.
    *  @param {string} tonality
    */
-
-  setTonality(tonality) {
+     setTonality(tonality) {
     this.tonality = tonality
     this._setScale()
   }
@@ -131,8 +121,7 @@ export default class Scales {
   /*  Set the tonality property and updates the scale.
    *  @param {string} key
    */
-
-  setKey(key) {
+     setKey(key) {
     this.key = key
     this._setScale()
   }
@@ -142,8 +131,7 @@ export default class Scales {
   /*
    * set the output scale in `current` based on `tonality`, `octave` and `key`.
    */
-
-  _setScale() {
+     _setScale() {
     const toOctaveOffset = this._indexToOffset(KEYS[this.key]) //  offset octaves depending on key
 
     this.current = SCALES[this.tonality].map((notePos, index) => {
@@ -165,16 +153,14 @@ export default class Scales {
    *  @param {string} octave 
    *  @param {number} number   
    */
-
-  _addToOctave(octave, number) {
+     _addToOctave(octave, number) {
     return (octave * 1 + number).toString()
   }
 
   /*  returns index to offset the octave depending on the current key.
    *  @param {number} key 
    */
-
-  _indexToOffset(key) {
+     _indexToOffset(key) {
     if (key == 1 || key == 2) return OCTAVE_INDEX - 2
 
     if (key == 3 || key == 4) return OCTAVE_INDEX - 3
