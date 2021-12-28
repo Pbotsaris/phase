@@ -1,99 +1,112 @@
 <script>
+  import { keyboard } from '../stores'
 
-import SynthVoice from '../tone/synth_voice'
+  let keyboardState
+  export let synth
 
-export let keys;
-export let synth;
-//const synth = new SynthVoice();
+  keyboard.subscribe((keys) => (keyboardState = keys))
 
+  /*
+   *  Updates the state of `keyboard` in the global store.
+   * @param {number} index the index of the key to be updated
+   * @param {boolean} value the value to update key.keydown
+   */
 
+  function updateState(index, value) {
+    keyboard.update((keys) => {
+      keys[index].keydown = value
+      return keys
+    })
+  }
 
-function updateKeys (key) {
-  const index = keys.findIndex( k => k.label === key.label)
-  if(index >= 0)
-    keys[index].keydown = true;
-  return index;
-}
+  /*
+   *  Sets a key from the virtual keyboard to keydown = true
+   * @param {Object} key the key in the virtual keyboard that was clicked on.
+   * @param {string} key.label 
+   * @param {boolean} key.keydown wether the key state is set to down.
+   * @param {string} key.note the note that this particular key corresponds to.
+   */
 
-/*
- *  Mouse callback 
- */
+  function setToKeydown(key) {
+    const index = keyboardState.findIndex((k) => k.label === key.label)
+    if (index >= 0) updateState(index, true)
+    return index
+  }
 
-function handleClick(key){
-   const index  = updateKeys(key)
-    synth.noteOn(key.note , '8n');
+  /*
+   *  Handles Mouse clicks in the virtual keyboard
+   * @param {Object} key the key in the virtual keyboard that was clicked on.
+   */
 
-  setTimeout(()=> keys[index].keydown = false, 150)
-}
+  function handleClick(key) {
+     console.log(key)
+    const index = setToKeydown(key)
+    synth.noteOn(key.note, '8n')
 
-/*
- *  Keyboard callback
- */
+    setTimeout(() => updateState(index, false), 150)
+  }
 
-function handleKeydown(event){
-  const index = updateKeys({label: event.key})
-  if(index >= 0)
-      setTimeout(()=> keys[index].keydown = false, 150)
-}
+  /*
+   *  Handle physical keyboard key down
+   * @param {Object} event the keydown event object. 
+   */
 
+  function handleKeydown(event) {
+    const index = setToKeydown({ label: event.key })
+    if (index >= 0) setTimeout(() => updateState(index, false), 150)
+  }
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<svelte:window on:keydown={handleKeydown} />
 
-{#each keys as key}
-  <div
-    on:click = {()=> handleClick(key)}
-    class="key-container">
+{#each keyboardState as key}
+  <div on:click={() => handleClick(key)} class="key-container">
     {#if key.keydown}
-       <img src="images/keydown.svg" alt="" class="key">
+      <img src="images/keydown.svg" alt="" class="key" />
     {:else}
-       <img src="images/key.svg" alt="" class="key">
-     {/if}
-     <span class="label {key.keydown ? 'down' : 'up'}">
-       {key.label}
+      <img src="images/key.svg" alt="" class="key" />
+    {/if}
+    <span class="label {key.keydown ? 'down' : 'up'}">
+      {key.label}
     </span>
   </div>
 {/each}
 
-<div class="controls" >
-
-<button on:click = {()=> synth.start() }> start sound </button>
-
-
+<div class="controls">
+  <button on:click={() => synth.start()}> start sound </button>
 </div>
 
 <style>
-.key-container{
- position: relative;
- display: flex;
- justify-content: center;
- align-items: center;
-}
+  .key-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.controls{
-   display: flex;
-   justify-content: center;
-}
+  .controls {
+    display: flex;
+    justify-content: center;
+  }
 
-.key{
-width: 50px;
-margin: 0 0.5rem;
-cursor: pointer;
-} 
+  .key {
+    width: 50px;
+    margin: 0 0.5rem;
+    cursor: pointer;
+  }
 
-.label{
-  font-size: 1.3em;
-  color: black;
-  position: absolute;
-  cursor: pointer;
-}
+  .label {
+    font-size: 1.3em;
+    color: black;
+    position: absolute;
+    cursor: pointer;
+  }
 
-  .up{
-  bottom: 20px;
-    }
+  .up {
+    bottom: 20px;
+  }
 
-   .down{
+  .down {
     bottom: 17px;
-    }
-
+  }
 </style>
