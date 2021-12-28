@@ -1,82 +1,46 @@
 <script>
+  import Keys from './Keys.svelte'
+  import SynthVoice from '../tone/synth_voice'
+  import Scales from '../scales'
+  import Controls from './Controls.svelte'
+  import { keyboard } from '../stores'
 
-import {fade} from 'svelte/transition'
 
-let keys = [ 
-    {label:  'a',  keydown: false},
-    { label: 's', keydown: false},
-    { label: 'd', keydown: false},
-    { label: 'f', keydown: false}, 
-    { label: 'g', keydown: false},
-    { label: 'h', keydown: false},
-    { label: 'j', keydown: false},
-    { label: 'k', keydown: false},
-    { label: 'l', keydown: false}
-  ];  
+  /* The Scale object is factory that outputs a desired scale.
+   * I does not hold any UI state.
+   */
 
-function updateKeys(key){
-  const index = keys.findIndex( k => k.label === key.label)
-  keys[index].keydown = true;
-  return index;
-}
+  let scale = new Scales()
+  let synth = new SynthVoice()
 
-function handleClick(key){
-   const index  = updateKeys(key)
-  setTimeout(()=> keys[index].keydown = false, 150)
-}
+  /* Initialize the keyboard store to the current scale
+   * from the scale factory.
+   */
 
-function handleKeydown(event){
-  const index = updateKeys({label: event.key})
-  setTimeout(()=> keys[index].keydown = false, 150)
-}
+  keyboard.update((keys) => {
+     return keys.map((key, i) => {
+      return { ...key, note: scale.current[i] }
+    })
+  })
 
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<div class="keys">
+  <Keys {synth} />
+</div>
 
-{#each keys as key, i}
-  <div
-    in:fade={{duration: 150, delay: 2500 + (i * 100)}}
-    on:click = {()=> handleClick(key)}
-    class="key-container">
-    {#if key.keydown}
-       <img src="images/keydown.svg" alt="" class="key">
-    {:else}
-       <img src="images/key.svg" alt="" class="key">
-     {/if}
-     <span
-       class="label {key.keydown ? 'down' : 'up'}">{key.label}
-    </span>
-  </div>
-{/each}
+<div class="controls">
+  <Controls {scale} />
+</div>
 
 <style>
-.key-container{
- position: relative;
- display: flex;
- justify-content: center;
- align-items: center;
 
- }
-.key{
-width: 50px;
-margin: 0 0.5rem;
-cursor: pointer;
-} 
-
-.label{
-  font-size: 1.3em;
-  color: black;
-  position: absolute;
-  cursor: pointer;
-}
-
-  .up{
-  bottom: 20px;
-    }
-
-   .down{
-    bottom: 17px;
-    }
-
+  .keys {
+    display: flex;
+  }
+  .controls {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: center;
+  }
 </style>

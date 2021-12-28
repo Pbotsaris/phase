@@ -1,5 +1,5 @@
 <script>
-	import Keyboard from './Keyboard.svelte'
+	import Keyboard from './Keyboard.svelte';
 
 </script>
 
@@ -14,6 +14,8 @@
 	.keyboard-container {
 		margin-top: 3rem;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 	}
 </style>
