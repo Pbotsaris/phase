@@ -60,5 +60,6 @@
 <style>
   .select {
     margin: 0.8rem;
+    cursor: pointer;
   }
 </style>

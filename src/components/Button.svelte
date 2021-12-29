@@ -35,6 +35,7 @@ import {createEventDispatcher} from 'svelte';
 		color: white;
 		transition: all 0.2s;
 		margin: 0.5rem;
+		cursor: pointer;
 	}
 
 	.is-recording{

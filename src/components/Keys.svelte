@@ -101,7 +101,7 @@
 {/each}
 
 <div class="controls">
-  <button on:click={() => synth.start()}> start sound </button>
+  <button on:click={() => synth.start()} style="cursor: pointer;"> start sound </button>
 </div>
 
 <style>
