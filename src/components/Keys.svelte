@@ -1,10 +1,26 @@
 <script>
-  import { keyboard } from '../stores'
+  import { keyboard, recordingStack } from '../stores'
 
   let keyboardState
   export let synth
 
   keyboard.subscribe((keys) => (keyboardState = keys))
+
+ /*
+   *  records/ adds the played note to the recordingStack store. 
+   * @param {string} note the note to be added to the stack. e.g. C1
+   */
+
+  function addToRecordingStack(note){
+    recordingStack.update( stack => {
+      if(stack.position == stack.max)
+        return stack;
+
+      stack.notes[stack.position].note = note; 
+      stack.position++;
+      return stack;
+    })
+  }
 
   /*
    *  Updates the state of `keyboard` in the global store.
@@ -41,6 +57,7 @@
   function handleClick(key) {
     const index = setToKeydown(key)
     synth.noteOn(key.note, '8n')
+     addToRecordingStack(key.note);
 
     setTimeout(() => updateState(index, false), 150)
   }
@@ -55,6 +72,8 @@
     const note = keyboardState[index].note;
 
     synth.noteOn(note, '8n')
+
+     addToRecordingStack(note);
 
     if (index >= 0) setTimeout(() => updateState(index, false), 150)
   }

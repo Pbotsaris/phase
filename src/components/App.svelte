@@ -1,5 +1,6 @@
 <script>
 	import Keyboard from './Keyboard.svelte';
+	import Recording from './Recording.svelte';
 
 </script>
 
@@ -8,6 +9,11 @@
 	<div class="keyboard-container">
 		<Keyboard />
 	</div>
+
+	<div class="recording-container">
+	 <Recording />
+	</div>
+	 
 </main>
 
 <style>
@@ -18,4 +24,17 @@
 		justify-content: center;
 		align-items: center;
 	}
+
+	.recording-container {
+		margin-top: 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+
+	:global(body){
+		background-color: darkgrey;
+	}
+
 </style>
