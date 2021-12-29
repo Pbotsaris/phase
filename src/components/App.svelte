@@ -1,5 +1,8 @@
 <script>
 	import Keyboard from './Keyboard.svelte';
+	import Recording from './Recording.svelte';
+	import RecordingButton from './RecordingButton.svelte'
+	import ResetButton from './ResetButton.svelte'
 
 </script>
 
@@ -8,6 +11,16 @@
 	<div class="keyboard-container">
 		<Keyboard />
 	</div>
+
+	<div class="recording-container">
+   <RecordingButton />
+	 <ResetButton />
+	</div>
+
+	<div class="recording-container">
+	 <Recording />
+	</div>
+	 
 </main>
 
 <style>
@@ -18,4 +31,17 @@
 		justify-content: center;
 		align-items: center;
 	}
+
+	.recording-container {
+		margin-top: 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+
+	:global(body){
+		background-color: darkgrey;
+	}
+
 </style>
