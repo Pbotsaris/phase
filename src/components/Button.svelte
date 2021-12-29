@@ -1,34 +1,32 @@
 <script>
-
-import {createEventDispatcher} from 'svelte';
+	import { createEventDispatcher } from 'svelte'
 
 	export let recordingEnabled
-	
-	const dispatch = createEventDispatcher();
+	export let width
 
-	 function handleClick() {
-		 /* will dispatch the click event to the parent compoment */
-		 dispatch('click', {});
+	const dispatch = createEventDispatcher()
+
+	function handleClick() {
+		/* will dispatch the click event to the parent compoment */
+		dispatch('click', {})
 	}
-
 </script>
 
 <div
 	class="button"
+	style={`width: ${width};`}
 	on:click={handleClick}
 	class:is-recording={recordingEnabled}
- >
+>
 	<span>
-		<slot> </slot>
+		<slot />
 	</span>
 </div>
-
 
 <style>
 	.button {
 		height: 60px;
-		width: 180px;
-		display:flex;
+		display: flex;
 		justify-content: center;
 		align-items: center;
 		background-color: darkcyan;
@@ -38,8 +36,8 @@ import {createEventDispatcher} from 'svelte';
 		cursor: pointer;
 	}
 
-	.is-recording{
+	.is-recording {
 		background-color: darkred;
 		transition: all 0.2s;
 	}
-	</style>
+</style>

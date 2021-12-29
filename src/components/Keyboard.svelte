@@ -3,8 +3,8 @@
   import SynthVoice from '../tone/synth_voice'
   import Scales from '../scales'
   import Controls from './Controls.svelte'
+  import OctaveButton from './OctaveButton.svelte'
   import { keyboard } from '../stores'
-
 
   /* The Scale object is factory that outputs a desired scale.
    * I does not hold any UI state.
@@ -26,7 +26,9 @@
 </script>
 
 <div class="keys">
-  <Keys {synth} />
+    <OctaveButton label="-" {scale} />
+     <Keys {synth} />
+    <OctaveButton label="+" {scale} />
 </div>
 
 <div class="controls">
