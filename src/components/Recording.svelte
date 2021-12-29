@@ -3,15 +3,19 @@
 
 	let noteSlots
 
-	recordingStack.subscribe((stack) => (noteSlots = stack.notes))
+	recordingStack.subscribe((stack) => {noteSlots = stack.notes})
 
 	function deleteNote(index) {
 		recordingStack.update((stack) => {
+			if(stack.position == 0)
+				return stack;
+
 			stack.delete(index)
 			stack.position--
 			return stack
 		})
 	}
+
 </script>
 
 {#each noteSlots as noteSlot}
@@ -37,9 +41,11 @@
 		margin: 0.5rem;
 		/* needs a better custom cursor for delete */
 		cursor: url('../images/icons/delete02.svg'), auto;
+		transition: all 0.2s;
 	}
 
 	.filled {
 		background-color: darkcyan;
+		transition: all 0.2s;
 	}
 </style>

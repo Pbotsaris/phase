@@ -16,6 +16,9 @@
       if(stack.position == stack.max)
         return stack;
 
+     if(!stack.recordingEnabled)
+      return stack;
+
       stack.notes[stack.position].note = note; 
       stack.position++;
       return stack;
@@ -69,10 +72,13 @@
 
   function handleKeydown(event) {
     const index = setToKeydown({ label: event.key })
+  
+    if(index < 0)
+      return;
+     
     const note = keyboardState[index].note;
 
     synth.noteOn(note, '8n')
-
      addToRecordingStack(note);
 
     if (index >= 0) setTimeout(() => updateState(index, false), 150)

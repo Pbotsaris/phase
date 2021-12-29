@@ -1,6 +1,7 @@
 <script>
 	import Keyboard from './Keyboard.svelte';
 	import Recording from './Recording.svelte';
+	import RecordingButton from './RecordingButton.svelte'
 
 </script>
 
@@ -8,6 +9,10 @@
 	Let's build this. Here is a keyboard.
 	<div class="keyboard-container">
 		<Keyboard />
+	</div>
+
+	<div class="recording-container">
+   <RecordingButton />
 	</div>
 
 	<div class="recording-container">
