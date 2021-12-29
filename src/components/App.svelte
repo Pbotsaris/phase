@@ -2,6 +2,7 @@
 	import Keyboard from './Keyboard.svelte';
 	import Recording from './Recording.svelte';
 	import RecordingButton from './RecordingButton.svelte'
+	import ResetButton from './ResetButton.svelte'
 
 </script>
 
@@ -13,6 +14,7 @@
 
 	<div class="recording-container">
    <RecordingButton />
+	 <ResetButton />
 	</div>
 
 	<div class="recording-container">

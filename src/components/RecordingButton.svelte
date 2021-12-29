@@ -1,5 +1,6 @@
 <script>
 	import { recordingStack } from '../stores'
+	import Button from '../components/Button.svelte'
 
 	let recordingEnabled
 	let recStackMaxSize;
@@ -19,8 +20,8 @@
 		})
 	}
 
-	/* toggle recording off if recording stack is full */
-  $: recStackPosition >= recStackMaxSize  && recordingEnabled && toggleRecording();
+	/* toggles recording off if recording stack is full */
+  $: recStackPosition >= recStackMaxSize && recordingEnabled && toggleRecording();
 
 	function handleKeydown(event) {
     if(event.key == 'r')
@@ -31,30 +32,8 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div
-	class="button"
-	on:click={toggleRecording}
-	class:is-recording={recordingEnabled}
- >
-	<span>
+<Button {recordingEnabled} on:click = {toggleRecording}>
 		{recordingEnabled ? 'Recording...' : 'Click to record'}
-	</span>
-</div>
+</Button>
 
-<style>
-	.button {
-		height: 60px;
-		width: 180px;
-		display:flex;
-		justify-content: center;
-		align-items: center;
-		background-color: darkcyan;
-		color: white;
-		transition: all 0.2s;
-	}
 
-	.is-recording{
-		background-color: darkred;
-		transition: all 0.2s;
-	}
-</style>
