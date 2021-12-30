@@ -13,12 +13,6 @@
   })
 </script>
 
-<div class="start-button">
-  <button on:click={() => synth.start()} style="cursor: pointer;">
-    start sound
-  </button>
-</div>
-
 <div class="keys">
   <OctaveButton label="-" {scale} />
   <Keys {synth} />
@@ -30,8 +24,4 @@
     display: flex;
   }
 
-  .start-button {
-    display: flex;
-    justify-content: center;
-  }
 </style>

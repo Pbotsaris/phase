@@ -2,27 +2,23 @@ import * as Tone from 'tone';
 import SynthVoice from './synth_voice'
 
 class Sequencer {
-  constructor(voice) {
-    this.voice = voice;
-    this.phasedVoice = new SynthVoice();
+  constructor(synth, phasedSynth) {
+    this.synth = synth;
+    this.phasedSynth = phasedSynth;
     this.sequence;
     this.phasedSequence;
     this.tranport = Tone.Transport;
-    this.phasedVoice.start();
+    this.delay = 0.0001;
   }
 
   create(notes) {
     this.sequence = new Tone.Sequence((time, note) => {
-      this.voice.noteOnTime(note, '8n', time);
+      this.synth.noteOnTime(note, '8n', time);
     }, notes);
 
-  }
-
-  createPhased(notes) {
-    let delay = 0.0001;
     this.phasedSequence = new Tone.Sequence((time, note) => {
-      this.phasedVoice.noteOnTime(note, '8n', time + delay);
-      delay += 0.0004;
+      this.phasedSynth.noteOnTime(note, '8n', time + this.delay);
+      this.delay += 0.0004;
     }, notes);
   }
 

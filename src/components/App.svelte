@@ -1,63 +1,83 @@
 <script>
-	import Keyboard from './Keyboard.svelte';
-	import Recording from './Recording.svelte';
+
+  import * as Tone from 'tone'
+
+  /* components */
+	import Keyboard from './Keyboard.svelte'
+	import Recording from './Recording.svelte'
 	import RecordingButton from './RecordingButton.svelte'
 	import ResetButton from './ResetButton.svelte'
 	import Controls from './Controls.svelte'
-  import Sequencer from '../tone/sequencer'
-  import SynthVoice from '../tone/synth_voice'
-  import Scales from '../scales'
+
+  /* classes */
+	import Sequencer from '../tone/sequencer'
+	import SynthVoice from '../tone/synth_voice'
+	import Scales from '../scales'
+	import createReverb from '../tone/Reverb'
+
+  /* store */
 	import { recordingStack } from '../stores.js'
 
-  /* The Scale object is factory that outputs a desired scale.
-   * I does not hold any UI state.
-   */
+	/* The Scale object is factory that outputs a desired scale.
+	 * I does not hold any UI state.
+	 */
 
 	let scale = new Scales()
-  let synth = new SynthVoice()
-	let sequence;
-	let sequenceReady = false;
-	let sequencer = new Sequencer(synth);
-
+	let synth = new SynthVoice()
+	let phasedSynth = new SynthVoice()
+	let sequence
+	let sequenceReady = false
+	let sequencer = new Sequencer(synth, phasedSynth)
 
 	recordingStack.subscribe((stack) => {
-	 sequence = stack.notes.map(note => note.note );
-	sequenceReady = stack.position >= stack.max;
+		sequence = stack.notes.map((note) => note.note)
+		sequenceReady = stack.position >= stack.max
 	})
 
-	function startSequence(sequenceReady){
-
-		if(sequenceReady){
-			sequencer.create(sequence);
-			sequencer.createPhased(sequence);
-			sequencer.start();
+	function startSequence(sequenceReady) {
+		if (sequenceReady) {
+			sequencer.create(sequence)
+			sequencer.start()
 		}
 	}
 
-	$: startSequence(sequenceReady);
-
+	$: startSequence(sequenceReady)
 </script>
 
 <main>
+	<div class="start-button">
+		<button
+			on:click={async () => {
+
+  		  await Tone.start();
+		    
+    		await createReverb();
+
+				synth.start()
+				phasedSynth.start()
+			}}
+			style="cursor: pointer;"
+		>
+			start sound
+		</button>
+	</div>
 
 	<div class="keyboard-container">
 		<Keyboard {synth} {scale} />
 	</div>
 
- <div class="controls">
-  <Controls {scale} />
- </div>
-
-
-	<div class="recording-container">
-   <RecordingButton />
-	 <ResetButton />
+	<div class="controls">
+		<Controls {scale} />
 	</div>
 
 	<div class="recording-container">
-	 <Recording />
+		<RecordingButton />
+		<ResetButton />
 	</div>
-	 
+
+	<div class="recording-container">
+		<Recording />
+	</div>
 </main>
 
 <style>
@@ -76,14 +96,18 @@
 		align-items: center;
 	}
 
-  .controls {
-    display: flex;
-    margin-top: 1rem;
-    justify-content: center;
-  }
+	.controls {
+		display: flex;
+		margin-top: 1rem;
+		justify-content: center;
+	}
 
-	:global(body){
+	:global(body) {
 		background-color: darkgrey;
 	}
 
+	.start-button {
+		display: flex;
+		justify-content: center;
+	}
 </style>
