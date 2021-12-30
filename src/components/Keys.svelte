@@ -100,9 +100,6 @@
   </div>
 {/each}
 
-<div class="controls">
-  <button on:click={() => synth.start()} style="cursor: pointer;"> start sound </button>
-</div>
 
 <style>
   .key-container {
@@ -112,10 +109,6 @@
     align-items: center;
   }
 
-  .controls {
-    display: flex;
-    justify-content: center;
-  }
 
   .key {
     width: 50px;
@@ -131,10 +124,10 @@
   }
 
   .up {
-    bottom: 20px;
+    bottom: 30px;
   }
 
   .down {
-    bottom: 17px;
+    bottom: 25px;
   }
 </style>
