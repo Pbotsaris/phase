@@ -14,4 +14,4 @@
 
 
 
-<Button recordingEnabled={false} on:click = {resetRecordingStack} > Reset </Button>
+<Button width="170px" recordingEnabled={false} on:click = {resetRecordingStack} > Reset </Button>
