@@ -18,8 +18,10 @@ export default class MasterOut {
 
 
    setReverbMix(value) {
-
       this.reverb.wet.value = value;
+   }
 
+   async loadTone() {
+      await Tone.start();
    }
 }
