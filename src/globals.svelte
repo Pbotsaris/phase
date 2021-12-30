@@ -15,6 +15,8 @@
  /*add css globals*/
 
 :global(body){
+
+		background-color: lightgrey;
 }
 
 </style>

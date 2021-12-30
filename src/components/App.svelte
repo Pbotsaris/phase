@@ -1,47 +1,25 @@
 <script>
-	import Keyboard from './Keyboard.svelte';
-	import Recording from './Recording.svelte';
-	import RecordingButton from './RecordingButton.svelte'
-	import ResetButton from './ResetButton.svelte'
+
+import Experience from "./Experience.svelte";
+import Landing from './Landing.svelte';
+
+import SynthVoice from '../tone/synth_voice'
+import MasterOut from '../tone/MasterOut'
+
+	let synth = new SynthVoice()
+	let phasedSynth = new SynthVoice()
+  let masterOut = new MasterOut();
+  let hasLoaded = false;
 
 </script>
 
-<main>
-	Let's build this. Here is a keyboard.
-	<div class="keyboard-container">
-		<Keyboard />
-	</div>
-
-	<div class="recording-container">
-   <RecordingButton />
-	 <ResetButton />
-	</div>
-
-	<div class="recording-container">
-	 <Recording />
-	</div>
-	 
-</main>
-
-<style>
-	.keyboard-container {
-		margin-top: 3rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.recording-container {
-		margin-top: 3rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+{#if hasLoaded}
+<Experience {synth} {phasedSynth} />
+{:else}
+  <Landing {synth} {phasedSynth} {masterOut} bind:hasLoaded />
+{/if}
 
 
-	:global(body){
-		background-color: darkgrey;
-	}
 
-</style>
+
+

@@ -42,7 +42,7 @@ class SynthVoice {
     };
 
     this.delay = new Tone.PingPongDelay('8n', 0.3);
-    this.reverb = new Tone.Reverb(200);
+//   this.reverb = new Tone.Reverb(200);
   }
 
   async start() {
@@ -58,21 +58,21 @@ class SynthVoice {
     });
     this.delay.wet.value = 0.1;
 
-    await this.reverb.ready;
+//    await this.reverb.ready;
 
-    this.reverb.wet.value = 0.05;
+//   this.reverb.wet.value = 0.05;
     this.synth.chain(
       this.delay,
-      this.reverb,
+//     this.reverb,
       this.vol,
       this.panner,
       Tone.Destination,
     )
   }
 
-  async isVerbReady() {
-    await this.reverb.ready;
-  }
+//  async isVerbReady() {
+//    await this.reverb.ready;
+//  }
 
   setDelay(delayTime, wet) {
     this.delay.wet.value = wet;

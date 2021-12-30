@@ -1,39 +1,39 @@
 import * as Tone from 'tone';
-import Scales from '../scales';
-import SynthVoice from './synth_voice';
+import SynthVoice from './synth_voice'
 
 class Sequencer {
-  constructor() {
-    this.voice = new SynthVoice();
-    this.scale = new Scales();
+  constructor(synth, phasedSynth) {
+    this.synth = synth;
+    this.phasedSynth = phasedSynth;
     this.sequence;
-    this.tranport = Tone.transport;
+    this.phasedSequence;
+    this.tranport = Tone.Transport;
+    this.delay = 0.0001;
   }
 
   create(notes) {
     this.sequence = new Tone.Sequence((time, note) => {
-      this.voice.noteOnTime(note, '8n', time);
+      this.synth.noteOnTime(note, '8n', time);
     }, notes);
 
-  }
-
-  createPhase(notes) {
-    let i = 0.0001;
-    this.sequence = new Tone.Sequence((time, note) => {
-      this.voice.noteOnTime(note, '8n', time + i);
-      i = i + 0.0004;
+    this.phasedSequence = new Tone.Sequence((time, note) => {
+      this.phasedSynth.noteOnTime(note, '8n', time + this.delay);
+      this.delay += 0.0004;
     }, notes);
   }
 
   start() {
     Tone.Transport.bpm.value = 140;
     this.sequence.start(0);
+    this.phasedSequence.start(0);
     Tone.Transport.start();
   }
 
   stop() {
     this.sequence.stop()
+    this.phasedSequence.stop()
     this.sequence.dispose();
+    this.phasedSequence.dispose();
     Tone.Transport.stop();
   }
 }
