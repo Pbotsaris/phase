@@ -84,8 +84,5 @@
 		justify-content: center;
 	}
 
-	:global(body) {
-		background-color: darkgrey;
-	}
-
+	
 </style>
