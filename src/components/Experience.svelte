@@ -1,6 +1,6 @@
 <script>
 	/* components */
-	import InteractionStage from './InteractionStage.svelte'
+	import KeyboardStage from './KeyboardStage.svelte'
 	import PhaseStage from './PhaseStage.svelte'
 
 	/* classes */
@@ -49,6 +49,6 @@
 	{#if sequenceReady}
 		<PhaseStage {sequencer} bind:sequenceReady />
 	{:else}
-		<InteractionStage {scale} {synth} />
+		<KeyboardStage {scale} {synth} />
 	{/if}
 </section>
