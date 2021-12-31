@@ -45,10 +45,10 @@
 	$: startSequence(sequenceReady)
 </script>
 
-<section>
 	{#if sequenceReady}
 		<PhaseStage {sequencer} bind:sequenceReady />
 	{:else}
 		<KeyboardStage {scale} {synth} />
 	{/if}
-</section>
+
+
