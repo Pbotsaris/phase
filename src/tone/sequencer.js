@@ -1,5 +1,4 @@
 import * as Tone from 'tone';
-import SynthVoice from './synth_voice'
 
 class Sequencer {
   constructor(synth, phasedSynth) {
@@ -35,6 +34,7 @@ class Sequencer {
     this.sequence.dispose();
     this.phasedSequence.dispose();
     Tone.Transport.stop();
+    this.delay = 0.0001;
   }
 }
 

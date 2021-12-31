@@ -18,6 +18,7 @@
 
 </script>
 
+<div class="recording-container">
 {#each noteSlots as noteSlot}
 	<div
 		class="recording-slot"
@@ -30,7 +31,13 @@
 	</div>
 {/each}
 
+</div>
+
 <style>
+
+
+
+
 	.recording-slot {
 		width: 40px;
 		display: flex;
@@ -48,4 +55,12 @@
 		background-color: darkcyan;
 		transition: all 0.2s;
 	}
+
+	.recording-container {
+		margin-top: 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 </style>

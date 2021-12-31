@@ -1,35 +1,39 @@
 <script>
+	/* components */
+	import InteractionStage from './InteractionStage.svelte'
+	import PhaseStage from './PhaseStage.svelte'
 
-  /* components */
-	import Keyboard from './Keyboard.svelte'
-	import Recording from './Recording.svelte'
-	import RecordingButton from './RecordingButton.svelte'
-	import ResetButton from './ResetButton.svelte'
-	import Controls from './Controls.svelte'
-
-  /* classes */
+	/* classes */
 	import Sequencer from '../tone/sequencer'
 	import Scales from '../scales'
 
-  /* store */
+	/* store */
 	import { recordingStack } from '../stores.js'
 
+	export let synth
+	export let phasedSynth
+
 	/* The Scale object is factory that outputs a desired scale.
-	 * I does not hold any UI state.
+	 * It holds internal state but does not UI state.
 	 */
 
-	export let synth;
-	export let phasedSynth;
-
 	let scale = new Scales()
-	let sequence;
-	let sequenceReady = false;
+	let sequence
+	let sequenceReady = false
 	let sequencer = new Sequencer(synth, phasedSynth)
 
 	recordingStack.subscribe((stack) => {
 		sequence = stack.notes.map((note) => note.note)
-		sequenceReady = stack.position >= stack.max
+		 setSequenceReady(stack.position >= stack.max);
 	})
+
+	/* add a small delay before unmounting PhaseStage module 
+		 Gives time for RecordingButton within to update state before umount;
+		*/
+	  function setSequenceReady(bool){
+		if(bool)
+			 setTimeout(()=> sequenceReady = bool, 50);
+	}
 
 	function startSequence(sequenceReady) {
 		if (sequenceReady) {
@@ -39,50 +43,12 @@
 	}
 
 	$: startSequence(sequenceReady)
-
 </script>
 
-<main>
-	
-	<div class="keyboard-container">
-		<Keyboard {synth} {scale} />
-	</div>
-
-	<div class="controls">
-		<Controls {scale} />
-	</div>
-
-	<div class="recording-container">
-		<RecordingButton />
-		<ResetButton />
-	</div>
-
-	<div class="recording-container">
-		<Recording />
-	</div>
-</main>
-
-<style>
-	.keyboard-container {
-		margin-top: 3rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.recording-container {
-		margin-top: 3rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.controls {
-		display: flex;
-		margin-top: 1rem;
-		justify-content: center;
-	}
-
-	
-</style>
+<section>
+	{#if sequenceReady}
+		<PhaseStage {sequencer} bind:sequenceReady />
+	{:else}
+		<InteractionStage {scale} {synth} />
+	{/if}
+</section>
