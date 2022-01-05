@@ -3,41 +3,36 @@
 
 	let noteSlots
 
-	recordingStack.subscribe((stack) => {noteSlots = stack.notes})
+	recordingStack.subscribe((stack) => {
+		noteSlots = stack.notes
+	})
 
 	function deleteNote(index) {
 		recordingStack.update((stack) => {
-			if(stack.position == 0)
-				return stack;
+			if (stack.position == 0) return stack
 
 			stack.delete(index)
 			stack.position--
 			return stack
 		})
 	}
-
 </script>
 
 <div class="recording-container">
-{#each noteSlots as noteSlot}
-	<div
-		class="recording-slot"
-		class:filled={noteSlot.note}
-		on:click={() => deleteNote(noteSlot.index)}
-	>
-		<span>
-			{noteSlot.note ? noteSlot.note : ''}
-		</span>
-	</div>
-{/each}
-
+	{#each noteSlots as noteSlot}
+		<div
+			class="recording-slot"
+			class:filled={noteSlot.note}
+			on:click={() => deleteNote(noteSlot.index)}
+		>
+			<span>
+				{noteSlot.note ? noteSlot.note : ''}
+			</span>
+		</div>
+	{/each}
 </div>
 
 <style>
-
-
-
-
 	.recording-slot {
 		width: 40px;
 		display: flex;
@@ -62,5 +57,4 @@
 		justify-content: center;
 		align-items: center;
 	}
-
 </style>

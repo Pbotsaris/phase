@@ -8,6 +8,9 @@ class Sequencer {
     this.phasedSequence;
     this.tranport = Tone.Transport;
     this.delay = 0.0001;
+
+    this.synth.setPan(-0.2);
+    this.phasedSynth.setPan(0.2);
   }
 
   create(notes) {
@@ -36,6 +39,12 @@ class Sequencer {
     Tone.Transport.stop();
     this.delay = 0.0001;
   }
+
+  setSynthsCutoff(freq) {
+    this.synth.setFilterCutoff(freq);
+    this.phasedSynth.setFilterCutoff(freq);
+  }
+
 }
 
 export default Sequencer;

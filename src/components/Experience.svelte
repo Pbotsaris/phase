@@ -46,9 +46,8 @@
 </script>
 
 	{#if sequenceReady}
-		<PhaseStage {sequencer} bind:sequenceReady />
 	{:else}
 		<KeyboardStage {scale} {synth} />
 	{/if}
 
-
+		<PhaseStage {sequencer} bind:sequenceReady />

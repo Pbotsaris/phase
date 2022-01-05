@@ -54,15 +54,15 @@
     {/each}
   </select>
 
-<select
-  class="select"
-  bind:value={selectedKey}
-  on:change={() => handleKeyChange(scale)}
->
-  {#each scale.keys as key}
-    <option value={key}> {key} </option>
-  {/each}
-</select>
+  <select
+    class="select"
+    bind:value={selectedKey}
+    on:change={() => handleKeyChange(scale)}
+  >
+    {#each scale.keys as key}
+      <option value={key}> {key} </option>
+    {/each}
+  </select>
 </div>
 
 <style>
