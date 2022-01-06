@@ -50,9 +50,9 @@ class Sequencer {
     this.phasedSynth.setFilterCutoff(freq)
   }
 
-  setSynthsDelayTime(whichSynth, delayTime) {
-    const synth = whichSynth == 'phased' ? this.phasedSynth : this.synth
-    synth.setDelay(delayTime, 0.3)
+  setSythsDelayMix(mix) {
+    this.synth.setDelayMix(mix)
+    this.phasedSynth.setDelayMix(mix)
   }
 }
 

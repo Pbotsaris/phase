@@ -38,7 +38,8 @@ class SynthVoice {
       release: 1.5,
     }
 
-    this.delay = new Tone.PingPongDelay('8n', 0.3)
+    this.delay = new Tone.PingPongDelay('8n', 0.5)
+    this.delay.feedback.value = 0.6
   }
 
   start() {
@@ -54,9 +55,12 @@ class SynthVoice {
     this.synth.chain(this.delay, this.vol, this.panner, Tone.Destination)
   }
 
-  setDelay(delayTime, mix) {
-    this.delay.wet.value = mix
+  setDelayTime(delayTime) {
     this.delay.delayTime.value = delayTime
+  }
+
+  setDelayMix(mix) {
+    this.delay.wet.value = mix
   }
 
   setPan(pan) {
