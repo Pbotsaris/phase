@@ -28,7 +28,7 @@
 	})
 
 	/* add a small delay before unmounting PhaseStage module 
-		 Gives time for RecordingButton within to update state before umount;
+		 Gives time for RecordingButton within to update state before unmount;
 		*/
 	  function setSequenceReady(bool){
 		if(bool)
@@ -43,11 +43,13 @@
 	}
 
 	$: startSequence(sequenceReady)
+
+
 </script>
 
 	{#if sequenceReady}
+   <PhaseStage {sequencer} currentScale={scale.getFullCurrentScale()} bind:sequenceReady />
 	{:else}
 		<KeyboardStage {scale} {synth} />
 	{/if}
 
-		<PhaseStage {sequencer} bind:sequenceReady />

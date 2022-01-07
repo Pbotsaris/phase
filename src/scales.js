@@ -125,6 +125,20 @@ export default class Scales {
     this._setScale()
   }
 
+  getFullCurrentScale() {
+    const notes = this.current.map((note) => note.charAt(0))
+    notes.pop()
+
+    let scale = []
+
+    for (let i = 0; i <= 6; i++) {
+      const notesWithOctaves = notes.map((note) => `${note}${i}`)
+      scale = scale.concat(notesWithOctaves)
+    }
+
+    return scale
+  }
+
   /* @private */
 
   /*

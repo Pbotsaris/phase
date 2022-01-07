@@ -2,9 +2,11 @@
   import StopButton from './StopButton.svelte'
 	import DelayTimeSelection from './DelayTimeSelection.svelte';
 	import Slider from './Slider.svelte';
+	import NoteSliders from './NoteSliders.svelte';
 
   export let sequencer
   export let sequenceReady
+  export let currentScale;
 
 </script>
 
@@ -19,6 +21,8 @@
 		<DelayTimeSelection synth={sequencer.synth} label="Synth" />
 		<DelayTimeSelection synth={sequencer.phasedSynth} label="Phased synth" />
   </div>
+
+  	<NoteSliders  {sequencer} {currentScale} />
 
 </section>
 

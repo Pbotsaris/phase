@@ -17,14 +17,14 @@ class SynthVoice {
    *  @param {string} wave
    *  @param {number} freq
    */
-  constructor(wave = 'fatsawtooth', freq = 500) {
+  constructor(wave = 'fatsawtooth', freq = 300) {
     this.synth = new Tone.MonoSynth()
     this.freq = freq
     this.wave = wave
     this.vol = new Tone.Volume(-6)
     this.panner = new Tone.Panner(0)
     this.freqEnv = {
-      attack: 0.01,
+      attack: 0.001,
       decay: 1,
       sustain: 0,
       release: 1.5,
@@ -32,14 +32,14 @@ class SynthVoice {
       octaves: 1,
     }
     this.ampEnv = {
-      attack: 0.01,
+      attack: 0.001,
       decay: 1,
       sustain: 0,
       release: 1.5,
     }
 
     this.delay = new Tone.PingPongDelay('8n', 0.5)
-    this.delay.feedback.value = 0.6
+    this.delay.feedback.value = 0.4
   }
 
   start() {
@@ -53,6 +53,10 @@ class SynthVoice {
     this.delay.wet.value = 0.1
 
     this.synth.chain(this.delay, this.vol, this.panner, Tone.Destination)
+  }
+
+  getDelayTime() {
+    return this.delay.delayTime.value
   }
 
   setDelayTime(delayTime) {

@@ -26,7 +26,7 @@ function setInitValue(type){
    if(type == 'filter')   
 				return 300;
    if(type == 'delay mix')
-				return  50;
+				return  30;
 }
 
 $: setSynthValue(value)
