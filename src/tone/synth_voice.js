@@ -23,12 +23,12 @@ class SynthVoice {
     this.wave = wave
     this.vol = new Tone.Volume(-6)
     this.panner = new Tone.Panner(0)
-    this.freqEnv = {
+    this.filterEnv = {
       attack: 0.001,
       decay: 1,
       sustain: 0,
       release: 1.5,
-      baseFrequency: freq,
+      baseFrequency: this.freq,
       octaves: 1,
     }
     this.ampEnv = {
@@ -47,7 +47,7 @@ class SynthVoice {
       oscillator: { type: this.wave },
       filter: { frequency: this.freq },
       envelope: this.ampEnv,
-      filterEnvelope: this.freqEnv,
+      filterEnvelope: this.filterEnv,
       volume: -6,
     })
     this.delay.wet.value = 0.1
@@ -71,8 +71,19 @@ class SynthVoice {
     this.panner.pan.value = pan
   }
 
+  setEnvelope(attack, decay, release) {
+    this.ampEnv = { ...this.ampEnv, attack, decay, release }
+    this.filterEnv = { ...this.filterEnv, attack, decay, release }
+
+    this.synth.set({
+      envelope: { attack: attack, decay: decay, release: release },
+      filterEnvelope: { attack: attack, decay: decay, release: release },
+    })
+  }
+
   setFilterCutoff(freq) {
     this.freq = freq
+    this.filterEnv.baseFrequency = this.freq
     this.synth.set({ filterEnvelope: { baseFrequency: this.freq } })
   }
 

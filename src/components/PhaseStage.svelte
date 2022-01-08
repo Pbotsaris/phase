@@ -14,8 +14,9 @@
   <StopButton {sequencer} bind:sequenceReady />
 
 	<Slider {sequencer} type="filter" />
-
 	<Slider {sequencer} type="delay mix" />
+
+	<Slider {sequencer} type="envelope" />
 
 		<div class="phase__delaytime-selection">
 		<DelayTimeSelection synth={sequencer.synth} label="Synth" />

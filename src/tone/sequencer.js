@@ -72,6 +72,11 @@ class Sequencer {
     this.phasedSynth.setDelayMix(mix)
   }
 
+  setSynthsEvelope(attack, decay, release) {
+    this.synth.setEnvelope(attack, decay, release)
+    this.phasedSynth.setEnvelope(attack, decay, release)
+  }
+
   scheduleChange(notes) {
     const currentTime = Tone.Time(Tone.Transport.position)
 
