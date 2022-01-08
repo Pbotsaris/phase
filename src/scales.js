@@ -126,7 +126,10 @@ export default class Scales {
   }
 
   getFullCurrentScale() {
-    const notes = this.current.map((note) => note.charAt(0))
+    const notes = this.current.map((note) => {
+      if (note.charAt(1) == '#') return `${note.charAt(0)}${note.charAt(1)}`
+      else return note.charAt(0)
+    })
     notes.pop()
 
     let scale = []

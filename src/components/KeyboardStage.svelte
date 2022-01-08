@@ -9,7 +9,6 @@
 export let synth;
 export let scale;
 
-
 </script>
 
 	<div class="keyboard-container">
@@ -27,6 +26,10 @@ export let scale;
 
 	<div class="recording-container">
 		<Recording />
+	</div>
+
+	<div class="recording-container">
+  <span>you can delete notes by clicking on them.</span>
 	</div>
 
 <style>
