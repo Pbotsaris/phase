@@ -2,7 +2,7 @@
   import Keys from './Keys.svelte'
   import OctaveButton from './OctaveButton.svelte'
   import { keyboard } from '../stores'
- 
+
   export let scale
   export let synth
 
@@ -14,12 +14,11 @@
 </script>
 
 <div class="keyboard-container">
-<div class="keys">
-  <OctaveButton label="-" {scale} />
-  <Keys {synth} />
-  <OctaveButton label="+" {scale} />
-</div>
-
+  <div class="keys">
+    <OctaveButton label="-" {scale} />
+    <Keys {synth} />
+    <OctaveButton label="+" {scale} />
+  </div>
 </div>
 
 <style>
@@ -27,13 +26,11 @@
     display: flex;
   }
 
-	.keyboard-container {
-		margin-top: 3rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-
+  .keyboard-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

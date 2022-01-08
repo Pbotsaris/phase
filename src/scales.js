@@ -1,7 +1,8 @@
 /*
  *   @class Scales
- *   The Scales class is a factory that will produce a music scale depending in internal state.
- *   The properties that will define a scale are `octave`, `key` and `tonality`. 
+ *   The Scales hq
+ *         lass is a factory that will produce a music scale depending in internal state.
+ *   The properties that will define a scale are `octave`, `key` and `tonality`.
  *   The output music scale is available as an array via the `current` property.
  *
  *   @example
@@ -51,48 +52,46 @@ const OCTAVE_INDEX = 7
 /* CLASS */
 
 export default class Scales {
-
   /* Creates a scale factory.
-   *  @param {string} octave  
+   *  @param {string} octave
    *  @param {string} tonality major, minor, dorian, mixo, phrygian and lydian.
    *  @param {string} key  C, Csharp, E, Gsharp etc.
    */
   constructor(octave = '3', tonality = 'major', key = 'C') {
-
-    /*  octave. 
-     *  @type {string} 
+    /*  octave.
+     *  @type {string}
      *  @public
      */
     this.octave = octave
 
     /*  tonality. accepted values: major, minor, dorian, mixo, phrygian and lydian.
-     *  @type {string} 
+     *  @type {string}
      *  @public
      */
     this.tonality = tonality
 
     /*  key. the musical key. accepted values: C, Csharp, E, Gsharp etc.
-     *  @type {string} 
+     *  @type {string}
      *  @public
      */
     this.key = key
 
     /*  current. the current selected scale.
-     *  @type {string} 
+     *  @type {string}
      *  @public
      *  @readonly
      */
     this.current
 
     /*  tonalities. a list with all available tonalities.
-     *  @type {array} 
+     *  @type {array}
      *  @public
      *  @readonly
      */
     this.tonalities = Object.keys(SCALES)
 
     /*  keys. a list with all available music keys.
-     *  @type {array} 
+     *  @type {array}
      *  @public
      *  @readonly
      */
@@ -126,6 +125,23 @@ export default class Scales {
     this._setScale()
   }
 
+  getFullCurrentScale() {
+    const notes = this.current.map((note) => {
+      if (note.charAt(1) == '#') return `${note.charAt(0)}${note.charAt(1)}`
+      else return note.charAt(0)
+    })
+    notes.pop()
+
+    let scale = []
+
+    for (let i = 0; i <= 6; i++) {
+      const notesWithOctaves = notes.map((note) => `${note}${i}`)
+      scale = scale.concat(notesWithOctaves)
+    }
+
+    return scale
+  }
+
   /* @private */
 
   /*
@@ -150,15 +166,15 @@ export default class Scales {
   }
 
   /* Addes adds a {number} an octave
-   *  @param {string} octave 
-   *  @param {number} number   
+   *  @param {string} octave
+   *  @param {number} number
    */
   _addToOctave(octave, number) {
     return (octave * 1 + number).toString()
   }
 
   /*  returns index to offset the octave depending on the current key.
-   *  @param {number} key 
+   *  @param {number} key
    */
   _indexToOffset(key) {
     if (key == 1 || key == 2) return OCTAVE_INDEX - 2

@@ -1,5 +1,4 @@
-<script>
-	import Keyboard from './Keyboard.svelte'
+<script> import Keyboard from './Keyboard.svelte'
 	import Recording from './Recording.svelte'
 	import RecordingButton from './RecordingButton.svelte'
 	import ResetButton from './ResetButton.svelte'
