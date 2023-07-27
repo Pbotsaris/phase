@@ -1,5 +1,5 @@
 <script>
-  import { keyboard, recordingStack } from '../stores'
+  import { keyboard, recordingStack } from '../../../stores'
 
   let keyboardState
   export let synth

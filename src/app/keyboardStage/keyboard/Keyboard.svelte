@@ -1,7 +1,7 @@
 <script>
   import Keys from './Keys.svelte'
+  import { keyboard } from '../../../stores'
   import OctaveButton from './OctaveButton.svelte'
-  import { keyboard } from '../stores'
 
   export let scale
   export let synth

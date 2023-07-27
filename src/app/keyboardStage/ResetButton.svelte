@@ -1,6 +1,6 @@
 <script>
-  import Button from './Button.svelte'
-  import { recordingStack } from '../stores'
+  import Button from '../components/Button.svelte'
+  import { recordingStack } from '../../stores'
 
   function resetRecordingStack() {
     recordingStack.update((stack) => {

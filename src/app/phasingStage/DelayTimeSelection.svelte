@@ -2,6 +2,7 @@
 
 export let synth;
 export let label;
+
 let delayTime = synth.getDelayTime()
 
 function handleClick(time) {
@@ -15,14 +16,23 @@ function handleClick(time) {
     <span class="label">{label}</span>
 				<div
 				   class:selected={delayTime == 0.5}
-					 class="selection" on:click={()=> {handleClick(0.5)}}> 1/4 </div>
+            class="selection" 
+            on:click={()=> {handleClick(0.5)}}
+            on:keyup={()=> {}}
+            > 1/4 </div>
 				<div
 
 				  class:selected={delayTime == 0.375}
-					class="selection"on:click={()=> {handleClick(0.375)}}> 1/8d </div>
+            class="selection"
+            on:click={()=> {handleClick(0.375)}}
+            on:keyup={()=> {}}
+            > 1/8d </div>
 				<div
 				  class:selected={delayTime == 0.25}
-				  class="selection"on:click={()=> {handleClick(0.25)}}> 1/8 </div>
+            class="selection"
+            on:click={()=> {handleClick(0.25)}}
+            on:keyup={()=> {}}
+            > 1/8 </div>
 	</div>
 
 <style>

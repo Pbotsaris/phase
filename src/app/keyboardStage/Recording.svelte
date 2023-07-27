@@ -1,5 +1,5 @@
 <script>
-	import { recordingStack } from '../stores'
+	import { recordingStack } from '../../stores'
 
 	let noteSlots
 

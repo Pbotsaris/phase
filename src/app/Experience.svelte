@@ -1,7 +1,7 @@
 <script>
 	/* components */
-	import KeyboardStage from './KeyboardStage.svelte'
-	import PhaseStage from './PhaseStage.svelte'
+	import KeyboardStage from './keyboardStage/KeyboardStage.svelte'
+	import PhaseStage from './phasingStage/PhaseStage.svelte'
 
 	/* classes */
 	import Sequencer from '../tone/sequencer'

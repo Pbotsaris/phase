@@ -1,5 +1,5 @@
 <script>
-  import { keyboard } from '../stores'
+  import { keyboard } from '../../stores'
 
   export let scale
   let selectedTonality

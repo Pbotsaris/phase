@@ -1,6 +1,6 @@
 <script>
-  import { keyboard } from '../stores'
-  import Button from './Button.svelte'
+  import { keyboard } from '../../../stores'
+  import Button from '../../components/Button.svelte'
 
   export let label
   export let scale

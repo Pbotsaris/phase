@@ -1,7 +1,7 @@
 <script>
 
-  import Button from './Button.svelte'
-	import { recordingStack } from '../stores'
+  import Button from '../components/Button.svelte'
+	import { recordingStack } from '../../stores'
 
   export let sequencer;
 	export let sequenceReady;
