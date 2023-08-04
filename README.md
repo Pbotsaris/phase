@@ -1,68 +1,47 @@
-# Phasing-it
+# Svelte + Vite
 
-Design deck [here](https://docs.google.com/presentation/d/1x8_tUvk-rBXJtD8WSb3J5taBcEmnZmbwopS1JqC9JyQ/edit#slide=id.gec54c6b315_0_88).
+This template should help get you started developing with Svelte in Vite.
 
-Assets received from the design/animator are located in the `assets/` directory under. They are organized by the date received.
+## Recommended IDE Setup
 
-All assets used in the application must be copied to the `public/` folder to its respective folder e.g. `images/` for svgs `audio/` for audiofiles.
+[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
+## Need an official Svelte framework?
 
-## Style guidelines
+Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
 
-### CSS
+## Technical considerations
 
-Please use descriptive names and let's try to follow the [BEM](http://getbem.com/naming/) convention if possible.
+**Why use this over SvelteKit?**
 
-### JS
+- It brings its own routing solution which might not be preferable for some users.
+- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
 
-- functions no longer than 15/20 lines
-- descriptive names
-- always camelCase
-- keep compnents as small as possible
+This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
 
-## Contributing
+Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
 
-Always create a branch before working on the app.
-    
-    git checkout -b <brachname>
+**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
 
-push your branch to the repo:
+Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
 
-    git push origin <branchname>
+**Why include `.vscode/extensions.json`?**
 
-Create a pull request on Github .
+Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
 
-## Run dev server
+**Why enable `checkJs` in the JS template?**
 
-```bash
-npm run dev
-```
-Navigate to [localhost:5000](http://localhost:5000). 
+It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
 
-## Building and running in production mode
+**Why is HMR not preserving my local component state?**
 
-```bash
-npm run build
-```
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
 
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
 
 ```js
-"start": "sirv public --single"
-```
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deployment
-
-### [surge](https://surge.sh/)
-
-```bash
-npm run build
-surge public my-project.surge.sh
+// store.js
+// An extremely simple external store
+import { writable } from 'svelte/store'
+export default writable(0)
 ```

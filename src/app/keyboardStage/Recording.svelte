@@ -20,7 +20,7 @@
 
 <div class="recording-container">
 	{#each noteSlots as noteSlot}
-		<div
+		<button
 			class="recording-slot"
 			class:filled={noteSlot.note}
 			on:click={() => deleteNote(noteSlot.index)}
@@ -28,7 +28,7 @@
 			<span>
 				{noteSlot.note ? noteSlot.note : ''}
 			</span>
-		</div>
+		</button>
 	{/each}
 </div>
 

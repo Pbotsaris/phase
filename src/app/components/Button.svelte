@@ -12,7 +12,7 @@
 	}
 </script>
 
-<div
+<button
 	class="button"
 	style={`width: ${width};`}
 	on:click={handleClick}
@@ -21,7 +21,7 @@
 	<span>
 		<slot />
 	</span>
-</div>
+</button>
 
 <style>
 	.button {

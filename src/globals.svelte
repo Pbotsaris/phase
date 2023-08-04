@@ -8,14 +8,9 @@
 
 <style type="text/css" media="screen">
 
- /*add globals variables*/
-:global(:root){
-}
-
  /*add css globals*/
 
 :global(body){
-
 		background-color: lightgrey;
 }
 

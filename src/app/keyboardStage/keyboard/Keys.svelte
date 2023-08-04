@@ -88,7 +88,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 {#each keyboardState as key}
-  <div on:click={() => handleClick(key)} class="key-container">
+  <button on:click={() => handleClick(key)} class="key-container">
     {#if key.keydown}
       <img src="images/keydown.svg" alt="" class="key" />
     {:else}
@@ -97,7 +97,7 @@
     <span class="label {key.keydown ? 'down' : 'up'}">
       {key.label}
     </span>
-  </div>
+  </button>
 {/each}
 
 
