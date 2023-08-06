@@ -47,7 +47,7 @@
 
 </script>
 
-	{#if sequenceReady}
+	{#if !sequenceReady}
    <PhaseStage {sequencer} currentScale={scale.getFullCurrentScale()} bind:sequenceReady />
 	{:else}
 		<KeyboardStage {scale} {synth} />
