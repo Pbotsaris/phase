@@ -256,8 +256,7 @@
   /* Hide main content and show the unsupported message on small screens */
   @media only screen and (max-width: 867px) {
     .content,
-    .bg,
-    .slider-area {
+    .bg{
       display: none;
     }
     .unsupported-message {
