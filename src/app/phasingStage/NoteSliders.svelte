@@ -1,70 +1,78 @@
 <script>
-  export let currentScale
-  export let sequencer
+  import NoteSlider from "./NoteSlider.svelte";
+  import {sliderIndexMapper} from '../../stores'
+  export let currentScale;
+  export let sequencer;
 
-  const notes = sequencer.notes
+  let sequence = sequencer.notes.map((note) => setValue(note));
 
-  let sequence = notes.map((note) => setValue(note))
+  /* Create mapper based on created sequence */
+  sliderIndexMapper.set(sequence.map((_, i) => {return {seqPos: i, sliderPos: 0}}))
 
   function setValue(note) {
-    return currentScale.findIndex((scaleNote) => scaleNote == note)
+    return currentScale.findIndex((scaleNote) => scaleNote == note);
   }
 
+
   function debounce(func, _sequence, timeout = 500) {
-    let timer
+    let timer;
     return (...args) => {
-      clearTimeout(timer)
+      clearTimeout(timer);
       timer = setTimeout(() => {
-        func.apply(this, args)
-      }, timeout)
-    }
+        func.apply(this, args);
+      }, timeout);
+    };
   }
 
   function updateSequencer(sequence) {
-    const newSeq = sequence.map((noteIndex) => currentScale[noteIndex])
-    sequencer.scheduleChange(newSeq)
+    const newSeq = sequence.map((noteIndex) => currentScale[noteIndex]);
+    sequencer.scheduleChange(newSeq);
   }
+
+  //    <div class="slider-container">
+  //      <input
+  //        type="range"
+  //        min="0"
+  //        max={currentScale.length - 1}
+  //        bind:value={sequence[index]}
+  //        class="slider"
+  //      />
+  //      {currentScale[sequence[index]]}
+  //    </div>
 
   const updateSequencerDebouced = debounce(
     () => updateSequencer(sequence),
     sequence
-  )
-  $: updateSequencerDebouced(sequence)
+  );
+
+  function handleSliderChange(event) {
+    sequence = event.detail;
+    console.log(sequence);
+    updateSequencerDebouced(sequence);
+  }
+
+ // $: updateSequencerDebouced(sequence);
 </script>
 
-<div class="container">
+<section class="slider-area">
   {#each sequence as _, index}
-    <div class="slider-container">
-      <input
-        type="range"
-        min="0"
-        max={currentScale.length - 1}
-        bind:value={sequence[index]}
-        class="slider"
-      />
-      {currentScale[sequence[index]]}
-    </div>
-  {/each}
-</div>
+    <NoteSlider
+        sequence={sequence}
+        seqIndex={index} 
+        currentScale={currentScale}
+        on:SliderChange={handleSliderChange}
+        />
+    {/each}
+</section>
 
 <style>
-  .container {
-    margin: 5rem;
+  .slider-area {
+    width: 70%;
     display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    z-index: 2;
   }
 
-  .slider-container {
-    display: flex;
-    align-items: center;
-  flex-direction: column;
-  }
 
-  .slider {
-    height: 200px;
-    outline: none;
-    -webkit-transform: rotate(270deg);
-       -moz-transform: rotate(270deg);
-            transform: rotate(270deg)
-
-  }
 </style>

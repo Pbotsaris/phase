@@ -12,7 +12,7 @@
 </script>
 
 <main>
-  {#if !hasLoaded}
+  {#if hasLoaded}
     <Experience {synth} {phasedSynth} />
   {:else}
     <Landing {synth} {phasedSynth} {masterOut} bind:hasLoaded />

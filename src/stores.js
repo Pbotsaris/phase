@@ -54,3 +54,14 @@ const stack = {
 }
 
 export const recordingStack = writable(stack)
+
+/* 
+ * Sliders can move in a horizontal or vertical direction.
+ * When moving in a horizontal directory and change position in realtion other sliders
+ * it's index position change and it will control a different offset in the sequenece.
+ * 
+ * This data structure help us keep track index position of the slider
+ *
+ */
+
+export const  sliderIndexMapper = writable([])

@@ -3,11 +3,11 @@
   //  import StopButton from "./StopButton.svelte";
   //  import DelayTimeSelection from "./DelayTimeSelection.svelte";
   //  import Slider from "./Slider.svelte";
-  //  import NoteSliders from "./NoteSliders.svelte";
+  import NoteSliders from "./NoteSliders.svelte";
   //
-  //  export let sequencer;
-  //  export let sequenceReady;
-  //  export let currentScale;
+  export let sequencer;
+  export let sequenceReady;
+  export let currentScale;
   //
   //  <StopButton {sequencer} bind:sequenceReady />
   //
@@ -21,7 +21,6 @@
   //    <DelayTimeSelection synth={sequencer.phasedSynth} label="Phased synth" />
   //  </div>
   //
-  //  <NoteSliders {sequencer} {currentScale} />
 
   //  <img class="anim-1" src="images/anim-1.png" alt="anim" />
   //  <img class="anim-2" src="images/anim-2.png" alt="anim" />
@@ -45,8 +44,6 @@
   let gridDim = { width: 1000, height: 600, animWidth: 400 };
   let innerWidth = window.innerWidth;
 
-  $: console.log(innerWidth);
-
   const animPos = [
     {
       star: { x: 0, y: 4, offset: true },
@@ -69,11 +66,11 @@
   ];
 
   $: if (BREAK_POINTS.large < innerWidth) {
-    gridDim = { width: 1000, height: 600, animWidth: 1000-600 };
+    gridDim = { width: 1000, height: 600, animWidth: 1000 - 600 };
   } else if (BREAK_POINTS.medium < innerWidth) {
-    gridDim = { width: 800, height: 480, animWidth: 800-480};
+    gridDim = { width: 800, height: 480, animWidth: 800 - 480 };
   } else {
-    gridDim = { width: 600, height: 360, animWidth: 600-360 };
+    gridDim = { width: 600, height: 360, animWidth: 600 - 360 };
   }
 
   function gridAt(x, y) {
@@ -170,9 +167,11 @@
     />
   </div>
 </section>
+  <NoteSliders {sequencer} {currentScale}/>
 <div class="unsupported-message">
   <span>
-    This experience is not supported on screen sizes smaller than {BREAK_POINTS.small} pixels.
+    This experience is not supported on screen sizes smaller than {BREAK_POINTS.small}
+    pixels.
   </span>
 </div>
 
@@ -258,7 +257,8 @@
   /* Hide main content and show the unsupported message on small screens */
   @media only screen and (max-width: 867px) {
     .content,
-    .bg {
+    .bg,
+    .slider-area {
       display: none;
     }
     .unsupported-message {
